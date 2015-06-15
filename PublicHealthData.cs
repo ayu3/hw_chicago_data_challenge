@@ -4,7 +4,6 @@ using System.Linq;
 using System.Collections.Generic;
 using CsvHelper;
 using CsvHelper.Configuration;
-//using CsvHelper.TypeConversion;
 
 namespace hw2_chicago_data_challenge
 {
