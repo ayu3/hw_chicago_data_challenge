@@ -9,7 +9,7 @@ namespace hw2_chicago_data_challenge
 {
 	class FileReader
 	{
-		public static void Main (string[] args)
+		public static void Main ()
 		{
 			//structures for storing data
 			var numb2names = new Dictionary<string, string> ();	//matching community areas to their assigned numbers
@@ -21,7 +21,6 @@ namespace hw2_chicago_data_challenge
 			using (var hsr = new StreamReader (@"Public_Health_Statistics-_Life_Expectancy_By_Community_Area.csv")) {
 				var healthreader = new CsvReader (hsr);
 				healthreader.Configuration.RegisterClassMap<PublicHealthMap> ();
-				Console.WriteLine ("Public Health Statistics");
 				while (healthreader.Read ()) {
 					var healthrecord = healthreader.GetRecord<PublicHealthDataDef> ();
 					numb2names [healthrecord.ComAreaNumber] = healthrecord.ComArea;
@@ -30,22 +29,15 @@ namespace hw2_chicago_data_challenge
 					//for code comprehension purposes
 					//Console.WriteLine (healthrecord.ComAreaNumber + " " + healthrecord.ComArea + " " + healthrecord.LifeExp2010);
 				}
+				healthlist.RemoveAt (healthlist.Count - 1);	//last item of list is not needed bc it is an average life expectancy of the entire city of Chicago
 				//conversion of list to array for consistancy
 				float[] healtharray = healthlist.ToArray();
-				/*//for dictionary code comprehension purposes
-				for (int i = 1; i < 11; i++) {
-					string key = i.ToString();
-					Console.WriteLine ("{0}", numb2names[key]);*/
-				//for list code comprehension purposes
-				for (int i = 0; i < healtharray.Length; i++) {
-					Console.WriteLine (i + "- " + healtharray [i] + "\n");
-				}
+
 
 				//reader for Grocery Store Statistics
 				using (var gsr = new StreamReader (@"Grocery_Stores_-_2011.csv")) {
 					var groceryreader = new CsvReader (gsr);
 					groceryreader.Configuration.RegisterClassMap<GroceryStoreMap> ();
-					Console.WriteLine ("\nGrocery Store Statistics");
 
 					while (groceryreader.Read ()) {
 						var groceryrecord = groceryreader.GetRecord<GroceryStoreDef> ();
@@ -54,15 +46,30 @@ namespace hw2_chicago_data_challenge
 						int gpos = garea - 1;
 						//increasing count of array
 						groceryarray [gpos] = groceryarray [gpos] + 1;
-						//for code comprehension purposes
-						//Console.WriteLine (groceryrecord.ComAreaNum + " " +groceryrecord.ComArea);
 					}
 				}
-				//for grocery array code comprehension purposes
-				for (int i = 0; i < groceryarray.Length; i++) {
-					Console.WriteLine (i + " - " + groceryarray [i]);
-				}
+
+				Console.WriteLine ("Test: " + CorrelationCoefficient (array1, array2));
+				Console.WriteLine ("Life Expectancy and Grocery Store Correlation Coefficient: " + CorrelationCoefficient (healtharray, groceryarray));
 			}
+		}
+
+		//code taken from http://stackoverflow.com/questions/17447817/correlation-of-two-arrays-in-c-sharp
+		static double CorrelationCoefficient(float[] array1, float[] array2){
+			if (array1.Length != array2.Length) {
+				Console.WriteLine ("Values must be the same length");
+			}
+			var avg1 = array1.Average ();
+			var avg2 = array2.Average ();
+
+			var sum1 = array1.Zip (array2, (x1, y1) => (x1 - avg1) * (y1 - avg2)).Sum ();
+
+			var sqr1 = array1.Sum (x => Math.Pow ((x - avg1), 2.0));
+			var sqr2 = array2.Sum (y => Math.Pow ((y - avg2), 2.0));
+
+			var result = sum1 / Math.Sqrt (sqr1 * sqr2);
+
+			return result;
 		}
 	}
 }

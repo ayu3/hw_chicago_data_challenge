@@ -39,9 +39,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FileReader.cs" />
     <Compile Include="PublicHealthData.cs" />
     <Compile Include="GroceryStoreData.cs" />
+    <Compile Include="Reader_and_Correlation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
