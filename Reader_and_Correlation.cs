@@ -12,10 +12,8 @@ namespace hw2_chicago_data_challenge
 		public static void Main ()
 		{
 			//structures for storing data
-			var numb2names = new Dictionary<string, string> ();	//matching community areas to their assigned numbers
 			var healthlist = new List<float>();	//keeping the average life expectancy by community area
 			float[] groceryarray = new float[77];	//keeping the number of grocery stores in each community area
-			//var groceryarray = new List<float>();	//keeping the number of grocery stores in each community area
 
 			//reader for Public Health Statistics
 			using (var hsr = new StreamReader (@"Public_Health_Statistics-_Life_Expectancy_By_Community_Area.csv")) {
@@ -23,12 +21,10 @@ namespace hw2_chicago_data_challenge
 				healthreader.Configuration.RegisterClassMap<PublicHealthMap> ();
 				while (healthreader.Read ()) {
 					var healthrecord = healthreader.GetRecord<PublicHealthDataDef> ();
-					numb2names [healthrecord.ComAreaNumber] = healthrecord.ComArea;
 					float age = Single.Parse (healthrecord.LifeExp2010);
 					healthlist.Add (age);
-					//for code comprehension purposes
-					//Console.WriteLine (healthrecord.ComAreaNumber + " " + healthrecord.ComArea + " " + healthrecord.LifeExp2010);
 				}
+
 				healthlist.RemoveAt (healthlist.Count - 1);	//last item of list is not needed bc it is an average life expectancy of the entire city of Chicago
 				//conversion of list to array for consistancy
 				float[] healtharray = healthlist.ToArray();
