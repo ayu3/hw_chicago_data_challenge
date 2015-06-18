@@ -48,5 +48,6 @@
     <None Include="Grocery_Stores_-_2011.csv" />
     <None Include="Public_Health_Statistics-_Life_Expectancy_By_Community_Area.csv" />
     <None Include="packages.config" />
+    <None Include="README.md" />
   </ItemGroup>
 </Project>

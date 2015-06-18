@@ -27,7 +27,7 @@ namespace hw2_chicago_data_challenge
 
 				healthlist.RemoveAt (healthlist.Count - 1);	//last item of list is not needed bc it is an average life expectancy of the entire city of Chicago
 				//conversion of list to array for consistancy
-				float[] healtharray = healthlist.ToArray();
+				float[] healtharray = healthlist.ToArray ();
 
 
 				//reader for Grocery Store Statistics
@@ -43,10 +43,9 @@ namespace hw2_chicago_data_challenge
 						//increasing count of array
 						groceryarray [gpos] = groceryarray [gpos] + 1;
 					}
-				}
 
-				Console.WriteLine ("Test: " + CorrelationCoefficient (array1, array2));
-				Console.WriteLine ("Life Expectancy and Grocery Store Correlation Coefficient: " + CorrelationCoefficient (healtharray, groceryarray));
+					Console.WriteLine ("Life Expectancy and Grocery Store Correlation Coefficient: " + CorrelationCoefficient (healtharray, groceryarray));
+				}
 			}
 		}
 
