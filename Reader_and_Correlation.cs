@@ -7,7 +7,7 @@ using CsvHelper.Configuration;
 
 namespace hw2_chicago_data_challenge
 {
-	class FileReader
+	class Reader_and_Correlation
 	{
 		public static void Main ()
 		{
@@ -43,14 +43,13 @@ namespace hw2_chicago_data_challenge
 						//increasing count of array
 						groceryarray [gpos] = groceryarray [gpos] + 1;
 					}
-
 					Console.WriteLine ("Life Expectancy and Grocery Store Correlation Coefficient: " + CorrelationCoefficient (healtharray, groceryarray));
 				}
 			}
 		}
 
 		//code taken from http://stackoverflow.com/questions/17447817/correlation-of-two-arrays-in-c-sharp
-		static double CorrelationCoefficient(float[] array1, float[] array2){
+		public static double CorrelationCoefficient(float[] array1, float[] array2){
 			if (array1.Length != array2.Length) {
 				Console.WriteLine ("Values must be the same length");
 			}

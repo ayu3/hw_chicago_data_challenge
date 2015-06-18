@@ -27,3 +27,7 @@ COMP 312 OPEN SOURCE COMPUTING
 	3.3 Reader_and_Correlation.cs
 
 		Contains the code to read the files, store their data and calculate their correlation using the correlation coefficient.
+
+	3.4 UnitTesting.cs
+
+		Contains the unit tests for the project.
